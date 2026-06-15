@@ -3,39 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friday Lizard Question 🦎</title>
+<title>Friday Date?</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #fff0f5, #fef9ff);
+    height: 100vh;
     overflow: hidden;
-}
-
-/* TOP GIF */
-.top-gif {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    align-items: center;
+    background: linear-gradient(135deg, #ffe4ec, #fff5f7);
+    font-family: Arial, sans-serif;
 }
 
-.top-gif img {
-    width: 220px;
-}
-
-/* MAIN */
 .container {
     text-align: center;
-    margin-top: 20px;
 }
 
 h1 {
-    color: #d94f8c;
+    color: #ff4d8d;
 }
 
-/* BUTTON AREA */
-.area {
+.cat {
+    width: 220px;
+    margin-bottom: 15px;
+}
+
+.buttons {
     position: relative;
     width: 100vw;
     height: 300px;
@@ -44,10 +39,10 @@ h1 {
 /* YES */
 #yesBtn {
     position: absolute;
-    left: 30%;
+    left: 35%;
     top: 40%;
     padding: 15px 30px;
-    border-radius: 999px;
+    border-radius: 50px;
     border: none;
     background: #4CAF50;
     color: white;
@@ -58,10 +53,10 @@ h1 {
 /* NO */
 #noBtn {
     position: absolute;
-    left: 60%;
+    left: 55%;
     top: 40%;
     padding: 15px 30px;
-    border-radius: 999px;
+    border-radius: 50px;
     border: none;
     background: #ff5c5c;
     color: white;
@@ -70,83 +65,42 @@ h1 {
     transition: 0.2s;
 }
 
-/* crawling lizards */
-.lizard {
-    position: absolute;
-    font-size: 30px;
-    animation: crawl 10s linear infinite;
-}
-
-@keyframes crawl {
-    0% { transform: translateX(-100px); }
-    100% { transform: translateX(110vw); }
-}
-
-/* SUCCESS SCREEN */
-.success {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(135deg, #fff0f5, #fef9ff);
-    padding: 20px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- TOP GIF -->
-<div class="top-gif">
-    <img src="https://media.tenor.com/9V9aZ7x0QWkAAAAC/yes-gif.gif">
-</div>
-
 <div class="container">
 
-    <h1>Will you go out with me this Friday? 🦎</h1>
+    <!-- SAFE WORKING GIF -->
+    <img class="cat"
+        src="https://media.tenor.com/3bTxZ4Hd5hAAAAAi/cat-cute.gif"
+        alt="cat">
 
-    <!-- MAIN GIF -->
-    <img src="https://makeagif.com/gif/lizard-hitting-button-U9O84Q"
-         style="width:250px;margin-bottom:20px;">
+    <h1>Will you go out with me this Friday? 🐱</h1>
 
-    <div class="area">
+    <div class="buttons">
         <button id="yesBtn">😊 Yes</button>
         <button id="noBtn">😢 No</button>
     </div>
 
 </div>
 
-<!-- crawling lizards -->
-<div class="lizard" style="top:10%">🦎</div>
-<div class="lizard" style="top:50%; animation-delay:2s;">🦎</div>
-<div class="lizard" style="top:80%; animation-delay:4s;">🦎</div>
-
 <script>
 
-const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+let noTexts = [
+    "😢 No",
+    "🙀 Nope",
+    "🐱 Try again",
+    "😹 Can't catch me",
+    "🙈 Almost",
+    "🐾 Nice try"
+];
 
 let index = 0;
-
-const noTexts = [
-    "😢 No",
-    "Really??",
-    "You can't catch me",
-    "Try again",
-    "Almost there",
-    "Sike",
-    "Can't say no to an elderly"
-];
-
-const yesTexts = [
-    "😊 Yes",
-    "👀 Look here",
-    "psst over here",
-    "🦎 Lizard still here",
-    "🥺 just say yess"
-];
 
 function moveNo() {
 
@@ -155,43 +109,49 @@ function moveNo() {
     const maxX = window.innerWidth - noBtn.offsetWidth - padding;
     const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-    const x = Math.max(padding, Math.random() * maxX);
-    const y = Math.max(padding, Math.random() * maxY);
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    // FORCE SAFE AREA (prevents going off-screen)
+    x = Math.max(padding, Math.min(x, maxX));
+    y = Math.max(padding, Math.min(y, maxY));
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    index++;
-
     noBtn.textContent = noTexts[index % noTexts.length];
-    yesBtn.textContent = yesTexts[index % yesTexts.length];
+    index++;
 }
 
-/* hover makes No run away */
+/* IMPORTANT: use mouseover (better than hover bugs) */
 noBtn.addEventListener("mouseover", moveNo);
 
+/* mobile support */
 noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     moveNo();
 });
 
-/* YES SUCCESS */
+/* YES button */
 yesBtn.addEventListener("click", () => {
-
     document.body.innerHTML = `
-        <div class="success">
+        <div style="
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg, #ffe4ec, #fff5f7);
+            text-align:center;
+        ">
+            <img src="https://media.tenor.com/3bTxZ4Hd5hAAAAAi/cat-cute.gif" width="180">
+            <h1 style="color:#ff4d8d;">YAAAY 🐱</h1>
+            <p>See you Friday ✨</p>
 
-            <h1>🦎 no changing mind now</h1>
-
-            <p style="font-size:22px;">
-                see you this Friday at 7pm in Rustic<br><br>
-
-                I can pick you up if you like<br>
-                or if you want to change the time, I'm nothing if not flexible 😉
-            </p>
-
-            <img src="https://media.tenor.com/3bTxZ4Hd5hAAAAAi/cat-cute.gif" width="200">
-
+            <!-- SAFE DITTO GIF -->
+            <img src="https://media.tenor.com/8bQw6v9Q9rAAAAAC/ditto-dance.gif"
+                 width="200"
+                 style="margin-top:20px;">
         </div>
     `;
 });
