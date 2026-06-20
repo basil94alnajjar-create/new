@@ -1,162 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friday Date?</title>
+
+<title>ADHD Legend 🐱</title>
 
 <style>
+
 body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ffe4ec, #fff5f7);
-    font-family: Arial, sans-serif;
+    margin:0;
+    height:100vh;
+    background:white;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:url("https://cur.cursors-4u.net/animals/ani-1/ani35.cur"), auto;
 }
+
 
 .container {
-    text-align: center;
+    text-align:center;
+    padding:40px;
 }
+
 
 h1 {
-    color: #ff4d8d;
+    font-size:42px;
+    color:#222;
 }
 
-.cat {
-    width: 220px;
-    margin-bottom: 15px;
+
+button {
+    padding:15px 45px;
+    margin:20px;
+    font-size:30px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-.buttons {
-    position: relative;
-    width: 100vw;
-    height: 300px;
+
+#yes {
+    background:#62ff62;
 }
 
-/* YES */
-#yesBtn {
-    position: absolute;
-    left: 35%;
-    top: 40%;
-    padding: 15px 30px;
-    border-radius: 50px;
-    border: none;
-    background: #4CAF50;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+
+#no {
+    background:#ff5555;
 }
 
-/* NO */
-#noBtn {
-    position: absolute;
-    left: 55%;
-    top: 40%;
-    padding: 15px 30px;
-    border-radius: 50px;
-    border: none;
-    background: #ff5c5c;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.2s;
+
+#lizard {
+    display:none;
+    width:250px;
+    margin:auto;
 }
+
+
+#calendar {
+    display:none;
+    margin-top:25px;
+}
+
+
+input {
+    padding:12px;
+    font-size:20px;
+}
+
+
+#confirm {
+    background:#4da6ff;
+    color:white;
+}
+
+
+#final {
+    display:none;
+    font-size:28px;
+    margin-top:25px;
+}
+
 
 </style>
+
 </head>
+
+
 
 <body>
 
+
 <div class="container">
 
-    <!-- SAFE WORKING GIF -->
-    <img class="cat"
-        src="https://media.tenor.com/3bTxZ4Hd5hAAAAAi/cat-cute.gif"
-        alt="cat">
 
-    <h1>Will you go out with me this Friday? 🐱</h1>
+<h1>
+ADHD Legend, shu rayek netla3? 🐱<br>
+Get it?? Sheklk fhmetha? Smort kid
+</h1>
 
-    <div class="buttons">
-        <button id="yesBtn">😊 Yes</button>
-        <button id="noBtn">😢 No</button>
-    </div>
+
+
+<img id="lizard"
+src="https://ih1.redbubble.net/image.676749012.7518/st,small,507x507-pad,600x600,f8f8f8.jpg">
+
+
+
+<br>
+
+
+<button id="yes">
+Yes
+</button>
+
+
+<button id="no">
+No
+</button>
+
+
+
+
+<div id="calendar">
+
+<h2>
+Noice, e5tary el date 😎
+</h2>
+
+
+<input type="date" id="date">
+
+
+<br><br>
+
+
+<input type="time" id="time">
+
+
+<br><br>
+
+
+<button id="confirm" onclick="setDate()">
+Confirm
+</button>
+
 
 </div>
 
+
+
+
+<div id="final">
+
+No take backs, am too old for this sh!t 👴
+<br><br>
+
+Please e7kely el date cuz I won't know from my end 😭
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
 <script>
 
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
 
 let noTexts = [
-    "😢 No",
-    "🙀 Nope",
-    "🐱 Try again",
-    "😹 Can't catch me",
-    "🙈 Almost",
-    "🐾 Nice try"
+    "You sure?",
+    "One more time",
+    "Last chance",
+    "sike",
+    "nope"
 ];
 
-let index = 0;
 
-function moveNo() {
+let yesTexts = [
+    "Yes",
+    "Psst over here",
+    "Bruh",
+    "Bigger yes",
+    "Even bigger",
+    "Yes??"
+];
 
-    const padding = 80;
 
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-    let x = Math.random() * maxX;
-    let y = Math.random() * maxY;
+let count = 0;
 
-    // FORCE SAFE AREA (prevents going off-screen)
-    x = Math.max(padding, Math.min(x, maxX));
-    y = Math.max(padding, Math.min(y, maxY));
+let yesSize = 30;
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
 
-    noBtn.textContent = noTexts[index % noTexts.length];
-    index++;
+
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+
+
+
+
+
+no.onclick = function(){
+
+
+document.getElementById("lizard").style.display="block";
+
+
+
+if(count < noTexts.length){
+
+    no.innerHTML = noTexts[count];
+
+    yes.innerHTML = yesTexts[count];
+
+    count++;
+
 }
 
-/* IMPORTANT: use mouseover (better than hover bugs) */
-noBtn.addEventListener("mouseover", moveNo);
 
-/* mobile support */
-noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveNo();
-});
+yesSize += 15;
 
-/* YES button */
-yesBtn.addEventListener("click", () => {
-    document.body.innerHTML = `
-        <div style="
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            background: linear-gradient(135deg, #ffe4ec, #fff5f7);
-            text-align:center;
-        ">
-            <img src="https://media.tenor.com/3bTxZ4Hd5hAAAAAi/cat-cute.gif" width="180">
-            <h1 style="color:#ff4d8d;">YAAAY 🐱</h1>
-            <p>See you Friday ✨</p>
+yes.style.fontSize = yesSize + "px";
 
-            <!-- SAFE DITTO GIF -->
-            <img src="https://media.tenor.com/8bQw6v9Q9rAAAAAC/ditto-dance.gif"
-                 width="200"
-                 style="margin-top:20px;">
-        </div>
-    `;
-});
+
+};
+
+
+
+
+
+
+
+yes.onclick = function(){
+
+
+document.getElementById("calendar").style.display="block";
+
+
+};
+
+
+
+
+
+
+
+
+function setDate(){
+
+
+let date = document.getElementById("date").value;
+
+let time = document.getElementById("time").value;
+
+
+
+if(date && time){
+
+
+document.getElementById("final").style.display="block";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+// Dancing GIF
+
+let gif = document.createElement("img");
+
+
+gif.src="https://media.giphy.com/media/4QFAH0qZ0LQn6/giphy.gif";
+
+
+gif.style.position="fixed";
+
+gif.style.bottom="10px";
+
+gif.style.left="10px";
+
+gif.style.width="150px";
+
+
+
+document.body.appendChild(gif);
+
+
 
 </script>
 
+
+
 </body>
+
 </html>
