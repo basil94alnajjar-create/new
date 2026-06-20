@@ -3,7 +3,7 @@
 
 <head>
 
-<title>ADHD Legend 🐱</title>
+<title>ADHD Legend</title>
 
 <style>
 
@@ -15,19 +15,16 @@ body {
     display:flex;
     justify-content:center;
     align-items:center;
-    cursor:url("https://cur.cursors-4u.net/animals/ani-1/ani35.cur"), auto;
 }
 
 
 .container {
     text-align:center;
-    padding:40px;
 }
 
 
 h1 {
-    font-size:42px;
-    color:#222;
+    font-size:40px;
 }
 
 
@@ -38,7 +35,6 @@ button {
     border:none;
     border-radius:20px;
     cursor:pointer;
-    transition:0.3s;
 }
 
 
@@ -52,13 +48,6 @@ button {
 }
 
 
-#lizard {
-    display:none;
-    width:250px;
-    margin:auto;
-}
-
-
 #calendar {
     display:none;
     margin-top:25px;
@@ -66,21 +55,22 @@ button {
 
 
 input {
-    padding:12px;
     font-size:20px;
-}
-
-
-#confirm {
-    background:#4da6ff;
-    color:white;
+    padding:10px;
 }
 
 
 #final {
     display:none;
-    font-size:28px;
+    font-size:26px;
     margin-top:25px;
+}
+
+
+#link {
+    display:none;
+    margin-top:25px;
+    font-size:22px;
 }
 
 
@@ -89,26 +79,19 @@ input {
 </head>
 
 
-
 <body>
+
 
 
 <div class="container">
 
 
 <h1>
-ADHD Legend, shu rayek netla3? 🐱<br>
+ADHD Legend, shu rayek netla3?
+<br>
 Get it?? Sheklk fhmetha? Smort kid
 </h1>
 
-
-
-<img id="lizard"
-src="https://ih1.redbubble.net/image.676749012.7518/st,small,507x507-pad,600x600,f8f8f8.jpg">
-
-
-
-<br>
 
 
 <button id="yes">
@@ -123,11 +106,27 @@ No
 
 
 
+
+<div id="link">
+
+<a href="https://www.youtube.com/watch?v=Er7fMYDrU4I" target="_blank">
+https://www.youtube.com/watch?v=Er7fMYDrU4I
+</a>
+
+</div>
+
+
+
+
+
+
 <div id="calendar">
 
+
 <h2>
-Noice, e5tary el date 😎
+Noice, e5tary el date
 </h2>
+
 
 
 <input type="date" id="date">
@@ -142,7 +141,7 @@ Noice, e5tary el date 😎
 <br><br>
 
 
-<button id="confirm" onclick="setDate()">
+<button onclick="confirmDate()">
 Confirm
 </button>
 
@@ -152,12 +151,15 @@ Confirm
 
 
 
+
+
 <div id="final">
 
-No take backs, am too old for this sh!t 👴
+No take backs, am too old for this sh!t old man
+
 <br><br>
 
-Please e7kely el date cuz I won't know from my end 😭
+Please e7kely el date cuz I won't know from my end
 
 
 </div>
@@ -165,7 +167,10 @@ Please e7kely el date cuz I won't know from my end 😭
 
 
 
+
 </div>
+
+
 
 
 
@@ -174,28 +179,27 @@ Please e7kely el date cuz I won't know from my end 😭
 
 
 let noTexts = [
-    "You sure?",
-    "One more time",
-    "Last chance",
-    "sike",
-    "nope"
+"You sure?",
+"One more time",
+"Last chance",
+"sike",
+"nope"
 ];
 
 
 let yesTexts = [
-    "Yes",
-    "Psst over here",
-    "Bruh",
-    "Bigger yes",
-    "Even bigger",
-    "Yes??"
+"Yes",
+"Psst over here",
+"Bruh",
+"Bigger yes",
+"Even bigger",
+"Yes??"
 ];
-
 
 
 let count = 0;
 
-let yesSize = 30;
+let size = 30;
 
 
 
@@ -209,24 +213,25 @@ const no = document.getElementById("no");
 no.onclick = function(){
 
 
-document.getElementById("lizard").style.display="block";
+document.getElementById("link").style.display="block";
 
 
 
 if(count < noTexts.length){
 
-    no.innerHTML = noTexts[count];
+no.innerHTML=noTexts[count];
 
-    yes.innerHTML = yesTexts[count];
+yes.innerHTML=yesTexts[count];
 
-    count++;
+count++;
 
 }
 
 
-yesSize += 15;
 
-yes.style.fontSize = yesSize + "px";
+size += 15;
+
+yes.style.fontSize=size+"px";
 
 
 };
@@ -237,12 +242,10 @@ yes.style.fontSize = yesSize + "px";
 
 
 
-yes.onclick = function(){
-
+yes.onclick=function(){
 
 document.getElementById("calendar").style.display="block";
 
-
 };
 
 
@@ -251,52 +254,23 @@ document.getElementById("calendar").style.display="block";
 
 
 
+function confirmDate(){
 
-function setDate(){
 
+let date=document.getElementById("date").value;
 
-let date = document.getElementById("date").value;
-
-let time = document.getElementById("time").value;
+let time=document.getElementById("time").value;
 
 
 
 if(date && time){
 
-
 document.getElementById("final").style.display="block";
 
-
 }
 
 
 }
-
-
-
-
-
-
-
-// Dancing GIF
-
-let gif = document.createElement("img");
-
-
-gif.src="https://media.giphy.com/media/4QFAH0qZ0LQn6/giphy.gif";
-
-
-gif.style.position="fixed";
-
-gif.style.bottom="10px";
-
-gif.style.left="10px";
-
-gif.style.width="150px";
-
-
-
-document.body.appendChild(gif);
 
 
 
